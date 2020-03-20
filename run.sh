@@ -132,3 +132,5 @@ then
     mono server.exe
   fi
 fi
+
+$SHELL

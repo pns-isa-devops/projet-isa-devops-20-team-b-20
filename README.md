@@ -59,7 +59,7 @@ bool scheduleDelivery(Date date, Delivery delivery);
 ```
 Delivery[] getNextDeliveries(); 
 ```
-- DeliveryInitializer 
+- fr.polytech.components.DeliveryInitializer 
 ```
 Parcel scanParcel(String parcelId); 
 Delivery createDelivery(Parcel parcel); 
