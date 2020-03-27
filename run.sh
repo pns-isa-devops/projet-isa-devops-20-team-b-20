@@ -76,7 +76,7 @@ then
 	echo "		shipment			shipment-component"
 	echo "		statistics			statistics-component"
 	echo "		warehouse			warehouse-component"
-	echo "		web				web-services"
+	echo "		web				web-service"
 	echo "	api					drone-api"
 	
 	exit;
@@ -140,7 +140,7 @@ function compile() {
 			cd projet-isa-devops-20-team-b-20-warehouse-component;
 		elif [[ $MODULE == "web" ]]
 		then
-			cd projet-isa-devops-20-team-b-20-web-services;
+			cd projet-isa-devops-20-team-b-20-web-service;
 		fi
 
 		mvn clean install
@@ -197,7 +197,7 @@ function run() {
 	then
 		cd projet-isa-devops-20-team-b-20-drone-delivery;
 		mvn clean install
-		cd projet-isa-devops-20-team-b-20-web-services;
+		cd projet-isa-devops-20-team-b-20-web-service;
 		mvn tomee:run
 	elif [[ $PROJECT == "api" ]]
 	then
@@ -281,7 +281,7 @@ function clean() {
 			rm -rf projet-isa-devops-20-team-b-20-warehouse-component/target;
 		elif [[ $MODULE == "web" ]]
 		then
-			rm -rf projet-isa-devops-20-team-b-20-web-services/target;
+			rm -rf projet-isa-devops-20-team-b-20-web-service/target;
 		else
 			rm -rf projet-isa-devops-20-team-b-20-delivery-component/target;
 			rm -rf projet-isa-devops-20-team-b-20-drone-park-component/target;
@@ -291,7 +291,7 @@ function clean() {
 			rm -rf projet-isa-devops-20-team-b-20-shipment-component/target;
 			rm -rf projet-isa-devops-20-team-b-20-statistics-component/target;
 			rm -rf projet-isa-devops-20-team-b-20-warehouse-component/target;
-			rm -rf projet-isa-devops-20-team-b-20-web-services/target;
+			rm -rf projet-isa-devops-20-team-b-20-web-service/target;
 		fi
 	elif [[ $PROJECT == "api" ]]
 	then
@@ -405,7 +405,7 @@ function pull() {
 			exit;
 		elif [[ $MODULE == "web" ]]
 		then
-			cd projet-isa-devops-20-team-b-20-web-services;
+			cd projet-isa-devops-20-team-b-20-web-service;
 			git pull
 			git checkout develop
 			exit;
