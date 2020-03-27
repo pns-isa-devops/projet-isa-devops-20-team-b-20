@@ -116,31 +116,31 @@ function compile() {
 
 		if [[ $MODULE == "delivery" ]]
 		then
-			cd delivery-component;
+			cd projet-isa-devops-20-team-b-20-delivery-component;
 		elif [[ $MODULE == "drone" ]]
 		then
-			cd drone-park-component;
+			cd projet-isa-devops-20-team-b-20-drone-park-component;
 		elif [[ $MODULE == "entities" ]]
 		then
-			cd entities;
+			cd projet-isa-devops-20-team-b-20-entities;
 		elif [[ $MODULE == "invoice" ]]
 		then
-			cd invoice-component;
+			cd projet-isa-devops-20-team-b-20-invoice-component;
 		elif [[ $MODULE == "schedule" ]]
 		then
-			cd schedule-component;
+			cd projet-isa-devops-20-team-b-20-schedule-component;
 		elif [[ $MODULE == "shipment" ]]
 		then
-			cd shipment-component;
+			cd projet-isa-devops-20-team-b-20-shipment-component;
 		elif [[ $MODULE == "statistics" ]]
 		then
-			cd statistics-component;
+			cd projet-isa-devops-20-team-b-20-statistics-component;
 		elif [[ $MODULE == "warehouse" ]]
 		then
-			cd warehouse-component;
+			cd projet-isa-devops-20-team-b-20-warehouse-component;
 		elif [[ $MODULE == "web" ]]
 		then
-			cd web-services;
+			cd projet-isa-devops-20-team-b-20-web-services;
 		fi
 
 		mvn clean install
@@ -197,7 +197,7 @@ function run() {
 	then
 		cd projet-isa-devops-20-team-b-20-drone-delivery;
 		mvn clean install
-		cd web-services;
+		cd projet-isa-devops-20-team-b-20-web-services;
 		mvn tomee:run
 	elif [[ $PROJECT == "api" ]]
 	then
@@ -257,41 +257,41 @@ function clean() {
 
 		if [[ $MODULE == "delivery" ]]
 		then
-			rm -rf delivery-component/target;
+			rm -rf projet-isa-devops-20-team-b-20-delivery-component/target;
 		elif [[ $MODULE == "drone" ]]
 		then
-			rm -rf drone-park-component/target;
+			rm -rf projet-isa-devops-20-team-b-20-drone-park-component/target;
 		elif [[ $MODULE == "entities" ]]
 		then
-			rm -rf entities/target;
+			rm -rf projet-isa-devops-20-team-b-20-entities/target;
 		elif [[ $MODULE == "invoice" ]]
 		then
-			rm -rf invoice-component/target;
+			rm -rf projet-isa-devops-20-team-b-20-invoice-component/target;
 		elif [[ $MODULE == "schedule" ]]
 		then
-			rm -rf schedule-component/target;
+			rm -rf projet-isa-devops-20-team-b-20-schedule-component/target;
 		elif [[ $MODULE == "shipment" ]]
 		then
-			rm -rf shipment-component/target;
+			rm -rf projet-isa-devops-20-team-b-20-shipment-component/target;
 		elif [[ $MODULE == "statistics" ]]
 		then
-			rm -rf statistics-component/target;
+			rm -rf projet-isa-devops-20-team-b-20-statistics-component/target;
 		elif [[ $MODULE == "warehouse" ]]
 		then
-			rm -rf warehouse-component/target;
+			rm -rf projet-isa-devops-20-team-b-20-warehouse-component/target;
 		elif [[ $MODULE == "web" ]]
 		then
-			rm -rf web-services/target;
+			rm -rf projet-isa-devops-20-team-b-20-web-services/target;
 		else
-			rm -rf delivery-component/target;
-			rm -rf drone-park-component/target;
-			rm -rf entities/target;
-			rm -rf invoice-component/target;
-			rm -rf schedule-component/target;
-			rm -rf shipment-component/target;
-			rm -rf statistics-component/target;
-			rm -rf warehouse-component/target;
-			rm -rf web-services/target;
+			rm -rf projet-isa-devops-20-team-b-20-delivery-component/target;
+			rm -rf projet-isa-devops-20-team-b-20-drone-park-component/target;
+			rm -rf projet-isa-devops-20-team-b-20-entities/target;
+			rm -rf projet-isa-devops-20-team-b-20-invoice-component/target;
+			rm -rf projet-isa-devops-20-team-b-20-schedule-component/target;
+			rm -rf projet-isa-devops-20-team-b-20-shipment-component/target;
+			rm -rf projet-isa-devops-20-team-b-20-statistics-component/target;
+			rm -rf projet-isa-devops-20-team-b-20-warehouse-component/target;
+			rm -rf projet-isa-devops-20-team-b-20-web-services/target;
 		fi
 	elif [[ $PROJECT == "api" ]]
 	then
@@ -357,55 +357,55 @@ function pull() {
 
 		if [[ $MODULE == "delivery" ]]
 		then
-			cd delivery-component;
+			cd projet-isa-devops-20-team-b-20-delivery-component;
 			git pull
 			git checkout develop
 			exit;
 		elif [[ $MODULE == "drone" ]]
 		then
-			cd drone-park-component;
+			cd projet-isa-devops-20-team-b-20-drone-park-component;
 			git pull
 			git checkout develop
 			exit;
 		elif [[ $MODULE == "entities" ]]
 		then
-			cd entities;
+			cd projet-isa-devops-20-team-b-20-entities;
 			git pull
 			git checkout develop
 			exit;
 		elif [[ $MODULE == "invoice" ]]
 		then
-			cd invoice-component;
+			cd projet-isa-devops-20-team-b-20-invoice-component;
 			git pull
 			git checkout develop
 			exit;
 		elif [[ $MODULE == "schedule" ]]
 		then
-			cd schedule-component;
+			cd projet-isa-devops-20-team-b-20-schedule-component;
 			git pull
 			git checkout develop
 			exit;
 		elif [[ $MODULE == "shipment" ]]
 		then
-			cd shipment-component;
+			cd projet-isa-devops-20-team-b-20-shipment-component;
 			git pull
 			git checkout develop
 			exit;
 		elif [[ $MODULE == "statistics" ]]
 		then
-			cd statistics-component;
+			cd projet-isa-devops-20-team-b-20-statistics-component;
 			git pull
 			git checkout develop
 			exit;
 		elif [[ $MODULE == "warehouse" ]]
 		then
-			cd warehouse-component;
+			cd projet-isa-devops-20-team-b-20-warehouse-component;
 			git pull
 			git checkout develop
 			exit;
 		elif [[ $MODULE == "web" ]]
 		then
-			cd web-services;
+			cd projet-isa-devops-20-team-b-20-web-services;
 			git pull
 			git checkout develop
 			exit;
