@@ -76,7 +76,7 @@ then
 	echo "		shipment			shipment-component"
 	echo "		statistics			statistics-component"
 	echo "		warehouse			warehouse-component"
-	echo "		web				web-service"
+	echo "		web				web-services"
 	echo "	api					drone-api"
 	
 	exit;
@@ -197,7 +197,7 @@ function run() {
 	then
 		cd projet-isa-devops-20-team-b-20-drone-delivery;
 		mvn clean install
-		cd web-service;
+		cd web-services;
 		mvn tomee:run
 	elif [[ $PROJECT == "api" ]]
 	then
