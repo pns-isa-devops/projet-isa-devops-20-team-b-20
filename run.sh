@@ -9,6 +9,10 @@ while (( "$#" )); do
 	  HARG=1
 	  break
       ;;
+	-c|--compile)
+	  CARG=1
+	  shift 1
+      ;;
 	-l|--list)
 	  LARG=1
 	  break
@@ -48,6 +52,7 @@ then
 	echo "	-l, --list					print list project and module"
 	echo "	-p <project>, --project <project>		select project"
 	echo "	-m <module>, --module <module>			select module"
+	echo "	-c, --compile					compile before running (only with action run)"
 	echo ""
 	echo "Action list:"
 	echo "	compile						compile project"
@@ -81,7 +86,7 @@ then
 	exit;
 fi
 
-if [[ -zt $PARAMS ]]
+if [[ -z $PARAMS ]]
 then
 	echo "No action selected, exiting..."
 	exit;
@@ -154,7 +159,7 @@ function compile() {
 
 if [[ $PARAMS = "compile" ]]
 then
-	if [[ -zt $PARG ]]
+	if [[ -z $PARG ]]
 	then
 		compile "cli" "nothing"
 		cd ..
@@ -190,18 +195,27 @@ function run() {
 			echo "Undefined client to run..."
 		fi
 
-		mvn clean install
+		if [[ $CARG = 1 ]]
+		then
+			mvn clean install
+		fi
 		mvn exec:java
 	elif [[ $PROJECT == "drone" ]]
 	then
 		cd projet-isa-devops-20-team-b-20-drone-delivery;
-		mvn clean install
+		if [[ $CARG = 1 ]]
+		then
+			mvn clean install
+		fi
 		cd projet-isa-devops-20-team-b-20-web-service;
 		mvn tomee:run
 	elif [[ $PROJECT == "api" ]]
 	then
 		cd projet-isa-devops-20-team-b-20-drone-api;
-		./compile.sh
+		if [[ $CARG = 1 ]]
+		then
+			./compile.sh
+		fi
 		mono server.exe
 	else
 		echo "Project $1 not exist..."
@@ -210,7 +224,7 @@ function run() {
 
 if [[ $PARAMS = "run" ]]
 then
-	if [[ -zt $PARG ]]
+	if [[ -z $PARG ]]
 	then
 		run "cli" "nothing"
 		cd ..
@@ -219,7 +233,7 @@ then
 		run "api" "nothing"
 	else
 		MODULE="nothing"
-		if [[ ! -zt $MARG ]]
+		if [[ ! -z $MARG ]]
 		then
 			MODULE=$MARG
 		fi
@@ -303,7 +317,7 @@ function clean() {
 
 if [[ $PARAMS = "clean" ]]
 then
-	if [[ -zt $PARG ]]
+	if [[ -z $PARG ]]
 	then
 		clean "cli" "nothing"
 		cd ..
