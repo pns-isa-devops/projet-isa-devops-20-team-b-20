@@ -53,7 +53,6 @@ then
 	echo "	compile						compile project"
 	echo "	run						compile and run"
 	echo "	clean						removing executable files"
-	echo "	pull						pull all repo and checkout develop"
 	echo ""
 	echo "Note: if nothing project specified, it will run all projects"
 	exit;
@@ -318,126 +317,6 @@ then
 			MODULE=$MARG
 		fi
 		clean $PARG $MODULE
-	fi
-	exit;
-fi
-
-function pull() {
-	PROJECT=$1
-	MODULE=$2
-
-	if [[ $PROJECT == "cli" ]]
-	then
-		cd projet-isa-devops-20-team-b-20-client;
-		if [[ $MODULE == "warehouse" ]]
-		then
-			cd projet-isa-devops-20-team-b-20-client-warehouse;
-			git pull
-			git checkout develop
-			exit;
-		elif [[ $MODULE == "office" ]]
-		then
-			cd projet-isa-devops-20-team-b-20-client-office;
-			git pull
-			git checkout develop
-			exit;
-		elif [[ $MODULE == "utils" ]]
-		then
-			cd projet-isa-devops-20-team-b-20-client-utils;
-			git pull
-			git checkout develop
-			exit;
-		fi
-		git pull --recurse-submodules
-		git submodule foreach --recursive git checkout develop
-		
-	elif [[ $PROJECT == "drone" ]]
-	then
-		cd projet-isa-devops-20-team-b-20-drone-delivery;
-
-		if [[ $MODULE == "delivery" ]]
-		then
-			cd projet-isa-devops-20-team-b-20-delivery-component;
-			git pull
-			git checkout develop
-			exit;
-		elif [[ $MODULE == "drone" ]]
-		then
-			cd projet-isa-devops-20-team-b-20-drone-park-component;
-			git pull
-			git checkout develop
-			exit;
-		elif [[ $MODULE == "entities" ]]
-		then
-			cd projet-isa-devops-20-team-b-20-entities;
-			git pull
-			git checkout develop
-			exit;
-		elif [[ $MODULE == "invoice" ]]
-		then
-			cd projet-isa-devops-20-team-b-20-invoice-component;
-			git pull
-			git checkout develop
-			exit;
-		elif [[ $MODULE == "schedule" ]]
-		then
-			cd projet-isa-devops-20-team-b-20-schedule-component;
-			git pull
-			git checkout develop
-			exit;
-		elif [[ $MODULE == "shipment" ]]
-		then
-			cd projet-isa-devops-20-team-b-20-shipment-component;
-			git pull
-			git checkout develop
-			exit;
-		elif [[ $MODULE == "statistics" ]]
-		then
-			cd projet-isa-devops-20-team-b-20-statistics-component;
-			git pull
-			git checkout develop
-			exit;
-		elif [[ $MODULE == "warehouse" ]]
-		then
-			cd projet-isa-devops-20-team-b-20-warehouse-component;
-			git pull
-			git checkout develop
-			exit;
-		elif [[ $MODULE == "web" ]]
-		then
-			cd projet-isa-devops-20-team-b-20-web-service;
-			git pull
-			git checkout develop
-			exit;
-		fi
-
-		git pull --recurse-submodules
-		git submodule foreach --recursive git checkout develop
-	elif [[ $PROJECT == "api" ]]
-	then
-		cd projet-isa-devops-20-team-b-20-drone-api;
-		git pull
-		git checkout develop
-		exit;
-	else
-		echo "Project $1 don't exist..."
-	fi
-}
-
-
-if [[ $PARAMS = "pull" ]]
-then
-	if [[ -zt $PARG ]]
-	then
-		git pull --recurse-submodules
-		git submodule foreach --recursive git checkout develop
-	else
-		MODULE="nothing"
-		if [[ ! -z $MARG ]]
-		then
-			MODULE=$MARG
-		fi
-		pull $PARG $MODULE
 	fi
 	exit;
 fi
