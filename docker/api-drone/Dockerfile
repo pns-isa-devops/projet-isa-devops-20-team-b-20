@@ -1,5 +1,5 @@
 FROM mono:3.10
-MAINTAINER Sébastien Mosser (mosser@i3s.unice.fr)
+MAINTAINER Team B
 
 # Loading the executable server inside the image
 COPY ./server.exe ./server.exe
