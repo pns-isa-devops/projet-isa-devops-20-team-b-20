@@ -226,11 +226,8 @@ if [[ $PARAMS = "run" ]]
 then
 	if [[ -z $PARG ]]
 	then
-		run "cli" "nothing"
-		cd ..
-		run "drone" "nothing"
-		cd ..
-		run "api" "nothing"
+		echo "Undefined project to run"
+		exit;
 	else
 		MODULE="nothing"
 		if [[ ! -z $MARG ]]
