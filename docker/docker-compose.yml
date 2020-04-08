@@ -1,0 +1,52 @@
+version: '2.1'
+
+services:
+
+  # The Drone Delivery service, a J2E system
+  dd_system:
+    image: drone-delivery
+    container_name: dd_system
+    environment:
+      - dronepark_host=container-dd-api-drone
+      - dronepark_port=9090
+    expose:
+      - "8080"
+    ports:
+      - "8080:8080"
+    depends_on:
+      - external_partners
+
+  # The external partners (drone api), implemented as .Net services
+  external_partners:
+    image: dd-api-drone
+    container_name: container-dd-api-drone
+    expose:
+        - "9090"
+    ports:
+      - "9090:9090"
+
+  # The warehouse CLI
+  client-warehouse:
+    image: dd-client-warehouse
+    container_name: container-dd-client-warehouse
+    command: "dd_system 8080"
+    volumes:
+      - .:/host
+    depends_on:
+      dd_system:
+        condition: service_healthy
+    stdin_open: true
+    tty: true
+
+  # The office CLI
+  client-office:
+    image: dd-client-office
+    container_name: container-dd-client-office
+    command: "dd_system 8080"
+    volumes:
+      - .:/host
+    depends_on:
+      dd_system:
+        condition: service_healthy
+    stdin_open: true
+    tty: true
