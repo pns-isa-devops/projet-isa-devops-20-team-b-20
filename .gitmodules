@@ -7,3 +7,6 @@
 [submodule "projet-isa-devops-20-team-b-20-client"]
 	path = projet-isa-devops-20-team-b-20-client
 	url = https://github.com/pns-isa-devops/projet-isa-devops-20-team-b-20-client.git
+[submodule "projet-isa-devops-20-team-b-20-carrier-api"]
+	path = projet-isa-devops-20-team-b-20-carrier-api
+	url = https://github.com/pns-isa-devops/projet-isa-devops-20-team-b-20-carrier-api.git
