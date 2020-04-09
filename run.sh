@@ -71,7 +71,7 @@ if [[ $LARG == 1 ]]; then
     echo "		warehouse			client-warehouse"
     echo "		office				client-office"
     echo "		utils				client-utils"
-    echo "	drone					drone-delivery"
+    echo "	drone				drone-delivery"
     echo "		delivery			delivery-component"
     echo "		drone				drone-park-component"
     echo "		entities			entities"
@@ -80,8 +80,9 @@ if [[ $LARG == 1 ]]; then
     echo "		shipment			shipment-component"
     echo "		statistics			statistics-component"
     echo "		warehouse			warehouse-component"
-    echo "		web				web-service"
-    echo "	api					drone-api"
+    echo "		web				    web-service"
+    echo "	drone-api			drone-api"
+    echo "  carrier-api         carrier-api"
 
     exit
 fi
@@ -133,9 +134,14 @@ function compile() {
         fi
 
         mvn clean install
-    elif [[ $PROJECT == "api" ]]; then
+    elif [[ $PROJECT == "drone-api" ]]; then
         cd projet-isa-devops-20-team-b-20-drone-api
         ./compile.sh
+        
+    elif [[ $PROJECT == "carrier-api" ]]; then
+        cd projet-isa-devops-20-team-b-20-carrier-api
+        ./compile.sh
+ 
     else
         echo "Project $1 don't exist..."
     fi
@@ -147,7 +153,9 @@ if [[ $PARAMS == "compile" ]]; then
         cd ..
         compile "drone" "nothing"
         cd ..
-        compile "api" "nothing"
+        compile "drone-api" "nothing"
+        cd ..
+        compile "carrier-api" "nothing"
     else
         MODULE="nothing"
         if [[ ! -z $MARG ]]; then
@@ -184,8 +192,14 @@ function run() {
         fi
         cd projet-isa-devops-20-team-b-20-web-service
         mvn tomee:run
-    elif [[ $PROJECT == "api" ]]; then
-        cd projet-isa-devops-20-team-b-20-drone-api
+    elif [[ $PROJECT == "drone-api" ]]; then
+            cd projet-isa-devops-20-team-b-20-drone-api
+        if [[ $CARG == 1 ]]; then
+            ./compile.sh
+        fi
+        mono server.exe
+    elif [[ $PROJECT == "carrier-api" ]]; then
+            cd projet-isa-devops-20-team-b-20-carrier-api
         if [[ $CARG == 1 ]]; then
             ./compile.sh
         fi
@@ -259,8 +273,11 @@ function clean() {
             rm -rf projet-isa-devops-20-team-b-20-warehouse-component/target
             rm -rf projet-isa-devops-20-team-b-20-web-service/target
         fi
-    elif [[ $PROJECT == "api" ]]; then
+    elif [[ $PROJECT == "drone-api" ]]; then
         cd projet-isa-devops-20-team-b-20-drone-api
+        rm -rf server.exe
+    elif [[ $PROJECT == "carrier-api" ]]; then
+        cd projet-isa-devops-20-team-b-20-carrier-api
         rm -rf server.exe
     else
         echo "Project $1 don't exist..."
@@ -273,7 +290,9 @@ if [[ $PARAMS == "clean" ]]; then
         cd ..
         clean "drone" "nothing"
         cd ..
-        clean "api" "nothing"
+        clean "drone-api" "nothing"
+        cd ..
+        clean "carrier-api" "nothing"
     else
         MODULE="nothing"
         if [[ ! -z $MARG ]]; then
