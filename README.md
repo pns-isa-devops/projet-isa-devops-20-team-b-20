@@ -2,7 +2,7 @@
 
 ## Components assembly
 
-<p align="center"><img src="https://user-images.githubusercontent.com/43060105/75693712-a7a31c80-5ca7-11ea-8d66-bfb3befdea9e.png" width="400"></p>
+<p align="center"><img src="https://files.slack.com/files-pri/TMW14CTRD-F011MJMHKQA/image.png" width="400"></p>
 
 ## Functional interfaces
 
