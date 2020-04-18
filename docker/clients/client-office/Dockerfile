@@ -1,8 +1,8 @@
 FROM openjdk:8
-MAINTAINER Sébastien Mosser (mosser@i3s.unice.fr)
+LABEL authors="Team B"
 
 # Loading the executable server inside the image
-COPY ./client-office-1.0-jar-with-dependencies.jar ./dd-client-office.jar
+COPY ./client-office-jar-with-dependencies.jar ./dd-client-office.jar
 
 # Mounting a local directory to support file loading in the shell
 VOLUME /host

@@ -7,7 +7,7 @@ cp ./server.exe ../docker/api-drone/.
 
 # building the docker image
 cd ../docker/api-drone/
-docker build -t dd-api-drone .
+docker build -t isa-devops/dd-api-drone .
 
 # cleaning up the environment
 rm -rf server.exe

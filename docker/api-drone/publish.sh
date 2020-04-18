@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker push dd-api-drone
+docker push isa-devops/dd-api-drone

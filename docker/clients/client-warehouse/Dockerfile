@@ -1,8 +1,8 @@
 FROM openjdk:8
-MAINTAINER Team B
+LABEL authors="Team B"
 
 # Loading the executable server inside the image
-COPY ./client-warehouse-1.0-jar-with-dependencies.jar ./dd-client-warehouse.jar
+COPY ./client-warehouse-jar-with-dependencies.jar ./dd-client-warehouse.jar
 
 # Mounting a local directory to support file loading in the shell
 VOLUME /host

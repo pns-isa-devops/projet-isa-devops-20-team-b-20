@@ -7,7 +7,7 @@ cp ./server.exe ../docker/api-carrier/.
 
 # building the docker image
 cd ../docker/api-carrier/
-docker build -t dd-api-carrier .
+docker build -t isa-devops/dd-api-carrier .
 
 # cleaning up the environment
 rm -rf server.exe

@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker push dd-client-warehouse
+docker push isa-devops/dd-client-warehouse

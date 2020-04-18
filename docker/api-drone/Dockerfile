@@ -1,5 +1,5 @@
 FROM mono:3.10
-MAINTAINER Team B
+LABEL authors="Team B"
 
 # Loading the executable server inside the image
 COPY ./server.exe ./server.exe

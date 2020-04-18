@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker push dd-client-office
+docker push isa-devops/dd-client-office

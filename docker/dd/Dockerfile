@@ -1,5 +1,5 @@
 FROM tomee:8-jdk-7.0.1-plus
-MAINTAINER Team B
+LABEL authors="Team B"
 
 # Working inside the local TomEE system
 WORKDIR /usr/local/tomee/
@@ -8,10 +8,10 @@ WORKDIR /usr/local/tomee/
 COPY ./drone-delivery-backend.war ./webapps/.
 
 # Creating the tomee/eemot user to access to the web admin console
-COPY resources/tomcat-user.xml ./conf/tomcat-users.xml
+COPY ./resources/tomcat-user.xml ./conf/tomcat-users.xml
 
 # Allow one to access to the manager from outside the container
-COPY resources/manager-context.xml ./webapps/manager/META-INF/context.xml
+COPY ./resources/manager-context.xml ./webapps/manager/META-INF/context.xml
 
 # Configure the link to the external partners
 ENV dronepark_host=localhost

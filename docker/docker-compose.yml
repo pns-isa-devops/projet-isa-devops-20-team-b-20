@@ -1,38 +1,45 @@
-version: '2.1'
+version: "2.1"
 
 services:
-
   # The Drone Delivery service, a J2E system
   dd_system:
-    image: drone-delivery
+    image: isa-devops/drone-delivery
     container_name: dd_system
     environment:
-      - dronepark_host=container-dd-api-drone
+      - dronepark_host=dd-api-drone
       - dronepark_port=9090
-      - carrier_host=container-dd-api-carrier
+      - carrier_host=dd-api-carrier
       - carrier_port=9191
     expose:
       - "8080"
     ports:
       - "8080:8080"
     depends_on:
-      - drone-api
-      - carrier-api
+      - external_partners_carrier
+      - external_partners_drone
 
-
-   # The drone api, implemented as .Net service
-  drone-api:
-    image: dd-api-drone
-    container_name: container-dd-api-drone
+  # The external partners (drone api), implemented as .Net services
+  external_partners_carrier:
+    image: isa-devops/dd-api-carrier
+    container_name: dd-api-carrier
     expose:
-        - "9090"
+      - "9191"
+    ports:
+      - "9191:9191"
+
+  # The external partners (drone api), implemented as .Net services
+  external_partners_drone:
+    image: isa-devops/dd-api-drone
+    container_name: dd-api-drone
+    expose:
+      - "9090"
     ports:
       - "9090:9090"
 
   # The carrier api, implemented as .Net services
-  carrier-api:
-    image: dd-api-carrier
-    container_name: container-dd-api-carrier
+  external_partners_carrier-api:
+    image: isa-devops/dd-api-carrier
+    container_name: dd-api-carrier
     expose:
       - "9191"
     ports:
@@ -40,8 +47,8 @@ services:
 
   # The warehouse CLI
   client-warehouse:
-    image: dd-client-warehouse
-    container_name: container-dd-client-warehouse
+    image: isa-devops/dd-client-warehouse
+    container_name: dd-client-warehouse
     command: "dd_system 8080"
     volumes:
       - .:/host
@@ -53,8 +60,8 @@ services:
 
   # The office CLI
   client-office:
-    image: dd-client-office
-    container_name: container-dd-client-office
+    image: isa-devops/dd-client-office
+    container_name: dd-client-office
     command: "dd_system 8080"
     volumes:
       - .:/host

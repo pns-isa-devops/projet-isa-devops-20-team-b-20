@@ -4,7 +4,7 @@
 #  - removing the container after exit,
 #  - detached (-d),
 #  - binding localhost:9090 to container:9090
-docker run --rm -d -p 9090:9090 dd-api-drone
+docker run --rm -d -p 9090:9090 isa-devops/dd-api-drone
 
 # to stop: docker stop ID
 # to start a new shell in the container: docker exec -it ID bash

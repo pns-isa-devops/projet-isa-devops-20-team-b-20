@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker push dd-api-carrier
+docker push isa-devops/dd-api-carrier
