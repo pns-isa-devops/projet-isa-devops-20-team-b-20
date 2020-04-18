@@ -7,8 +7,12 @@ pipeline{
     stages {
         stage("build") {
             steps {
-                dir('./docker/') {
-                    sh 'chmod +x ./build-all.sh'
+                    sh '''
+                        chmod +x                                                         \
+                                ./build-all.sh                                           \
+                                ../projet-isa-devops-20-team-b-20-carrier-api/compile.sh \
+                                ../projet-isa-devops-20-team-b-20-drone-api/compile.sh
+                    '''
                     sh './build-all.sh'
                 }
             }
