@@ -14,7 +14,7 @@ pipeline{
                                 ../projet-isa-devops-20-team-b-20-carrier-api/compile.sh \
                                 ../projet-isa-devops-20-team-b-20-drone-api/compile.sh
                     '''
-                    sh './build-all.sh'
+                    sh "sg docker -c './build-all.sh'"
                 }
             }
         }
@@ -23,9 +23,13 @@ pipeline{
                 sh "sg docker -c 'docker-compose -f ./docker/docker-compose.yml up -d --build'"
            }
         }
-        stage("do somethine") {
+        stage("do something") {
             steps {
                 echo "do something here"
+                // uncomment when integrations tests are ready
+                // dir('./projet-isa-devops-20-team-b-20-client/') {
+                //     sh "mvn integration-test"
+                // }
             }
         }
         stage("docker down") {
