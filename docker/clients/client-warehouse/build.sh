@@ -3,7 +3,7 @@
 #Preparing environment
 cd ../../../projet-isa-devops-20-team-b-20-client/projet-isa-devops-20-team-b-20-client-warehouse
 echo "Compiling the DD client warehouse system"
-mvn -q -DskipTests clean package assembly:single
+mvn clean package assembly:single
 echo "Done"
 cp ./target/client-warehouse-jar-with-dependencies.jar ../../docker/clients/client-warehouse/.
 

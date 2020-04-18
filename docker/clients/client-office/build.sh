@@ -3,7 +3,7 @@
 #Preparing environment
 cd ../../../projet-isa-devops-20-team-b-20-client/projet-isa-devops-20-team-b-20-client-office
 echo "Compiling the DD client office system"
-mvn -q -DskipTests clean package assembly:single
+mvn clean package assembly:single
 echo "Done"
 cp ./target/client-office-jar-with-dependencies.jar ../../docker/clients/client-office/.
 
