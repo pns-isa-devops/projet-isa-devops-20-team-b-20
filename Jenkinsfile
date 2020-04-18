@@ -7,13 +7,15 @@ pipeline{
     stages {
         stage("build") {
             steps {
-                sh '''
-                    chmod +x                                                         \
-                            ./build-all.sh                                           \
-                            ../projet-isa-devops-20-team-b-20-carrier-api/compile.sh \
-                            ../projet-isa-devops-20-team-b-20-drone-api/compile.sh
-                '''
-                sh './build-all.sh'
+                dir('./docker/') {
+                    sh '''
+                        chmod +x                                                         \
+                                ./build-all.sh                                           \
+                                ../projet-isa-devops-20-team-b-20-carrier-api/compile.sh \
+                                ../projet-isa-devops-20-team-b-20-drone-api/compile.sh
+                    '''
+                    sh './build-all.sh'
+                }
             }
         }
         stage("docker up") {
@@ -28,9 +30,7 @@ pipeline{
         }
         stage("docker down") {
            steps {
-               dir('./docker/') {
-                    sh "sg docker -c 'docker-compose -f docker/docker-compose.yml down'"
-               }
+                sh "sg docker -c 'docker-compose -f docker/docker-compose.yml down'"
            }
         }
     }
