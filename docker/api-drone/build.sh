@@ -2,7 +2,6 @@
 
 #Preparing environment
 cd ../../projet-isa-devops-20-team-b-20-drone-api
-ls -l
 ./compile.sh
 cp ./server.exe ../docker/api-drone/.
 

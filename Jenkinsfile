@@ -14,28 +14,29 @@ pipeline{
                                 ../projet-isa-devops-20-team-b-20-carrier-api/compile.sh \
                                 ../projet-isa-devops-20-team-b-20-drone-api/compile.sh
                     '''
-                    sh "sg docker -c './build-all.sh'"
+                    sh "./build-all.sh"
                 }
             }
         }
-        stage("docker up") {
-           steps {
-                sh "sg docker -c 'docker-compose -f ./docker/docker-compose.yml up -d --build'"
-           }
-        }
-        stage("do something") {
-            steps {
-                echo "do something here"
-                // uncomment when integrations tests are ready
-                // dir('./projet-isa-devops-20-team-b-20-client/') {
-                //     sh "mvn integration-test"
-                // }
+        stages {
+            stage("docker up") {
+                steps {
+                        sh "docker-compose -f ./docker/docker-compose.yml up -d --build"
+                }
             }
-        }
-        stage("docker down") {
-           steps {
-                sh "sg docker -c 'docker-compose -f docker/docker-compose.yml down'"
-           }
+            stage("schedule and make a delivery") {
+                steps {
+                    echo "run integration test"
+                    dir('./projet-isa-devops-20-team-b-20-client/') {
+                        sh "mvn integration-test -Dcucumber.options=src/test/resources/features/schedule_and_make_a_delivery.feature"
+                    }
+                }
+            }
+            stage("docker down") {
+                steps {
+                        sh "docker-compose -f docker/docker-compose.yml down"
+                }
+            }
         }
     }
     post{
