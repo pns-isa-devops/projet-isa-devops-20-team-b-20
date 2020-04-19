@@ -18,23 +18,25 @@ pipeline{
                 }
             }
         }
-        stages {
-            stage("docker up") {
-                steps {
-                        sh "docker-compose -f ./docker/docker-compose.yml up -d --build"
-                }
-            }
-            stage("schedule and make a delivery") {
-                steps {
-                    echo "run integration test"
-                    dir('./projet-isa-devops-20-team-b-20-client/') {
-                        sh "mvn integration-test -Dcucumber.options=src/test/resources/features/schedule_and_make_a_delivery.feature"
+        stage("integration tests") {
+            stages {
+                stage("docker up") {
+                    steps {
+                            sh "docker-compose -f ./docker/docker-compose.yml up -d --build"
                     }
                 }
-            }
-            stage("docker down") {
-                steps {
-                        sh "docker-compose -f docker/docker-compose.yml down"
+                stage("schedule and make a delivery") {
+                    steps {
+                        echo "run integration test"
+                        dir('./projet-isa-devops-20-team-b-20-client/') {
+                            sh "mvn integration-test -Dcucumber.options=src/test/resources/features/schedule_and_make_a_delivery.feature"
+                        }
+                    }
+                }
+                stage("docker down") {
+                    steps {
+                            sh "docker-compose -f docker/docker-compose.yml down"
+                    }
                 }
             }
         }
