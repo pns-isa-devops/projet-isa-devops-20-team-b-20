@@ -1,0 +1,5 @@
+echo ""
+echo " Jenkins URL  : ci.otakedev.com"
+echo " Jenkins USER : isa-devops"
+echo " Jenkins PWD  : AnA4x7vEdvXf9ZL"
+echo ""

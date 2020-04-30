@@ -11,60 +11,65 @@ pipeline{
                 dir('./docker/') {
                     sh '''
                         chmod +x                                                         \
-                                ./build-all.sh                                           \
+                                ./build-test.sh                                           \
                                 ../projet-isa-devops-20-team-b-20-carrier-api/compile.sh \
                                 ../projet-isa-devops-20-team-b-20-drone-api/compile.sh
                     '''
-                    sh "./build-all.sh"
+                    sh "./build-test.sh"
                 }
             }
         }
         stage("integration tests") {
+
             stages {
                 stage("schedule and make a delivery") {
-                    steps {
-                        echo "run integration test on [schedule and make a delivery]"
-                        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                            dir('./projet-isa-devops-20-team-b-20-client/') {
-                                echo "docker env up"
-                                sh "docker-compose -f ../docker/docker-compose.yml up -d --build"
-                                sh "mvn integration-test -Dcucumber.options=src/test/resources/features/schedule_and_make_a_delivery.feature"
-                                sh "docker-compose -f ../docker/docker-compose.yml down"
-                                echo "docker env down"
-                            }
-                        }
+                    environment {
+                        TEST_NAME = 'schedule_and_make_a_delivery'
                     }
-                    post {
-                        success {
-                            script {
-                                results += "\n[schedule and make a delivery] : SUCCESS"
+                    stages {
+                        stage("Docker up test Env") {
+                            steps {
+                                dir('./docker/env/test/') {
+                                    echo "docker env up"
+                                    sh "docker-compose -f docker-compose.yml up -d --build"
+                                }
                             }
                         }
-                        failure {
-                            script {
-                                results += "\n[schedule and make a delivery] : FAILURE"
+                        stage("Proceed with the test") {
+                            steps {
+                                echo "run integration test on [${TEST_NAME}]"
+                                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                                    sh """
+                                        docker wait dd-integration-tests > ${TEST_NAME}.txt
+                                        exit '$(cat ${TEST_NAME}.txt)'
+                                    """
+                                }
+                            }
+                            post {
+                                success {
+                                    script {
+                                        results += "\n[${TEST_NAME}] : SUCCESS"
+                                    }
+                                }
+                                failure {
+                                    script {
+                                        results += "\n[${TEST_NAME}] : FAILURE"
+                                    }
+                                }
+                            }
+                        }
+                        stage("Docker down test Env") {
+                            steps {
+                                dir('./docker/env/test/') {
+                                    sh "docker-compose -f docker-compose.yml down"
+                                    echo "docker env down"
+                                }
                             }
                         }
                     }
                 }
-                // stage("other test...") {
-                //     steps {
-                //         echo "other test here"
-                //     }
-                //     post {
-                //         success {
-                //             script {
-                //                 results += "\n[other] : SUCCESS"
-                //             }
-                //         }
-                //         failure {
-                //             script {
-                //                 results += "\n[other] : FAILURE"
-                //             }
-                //         }
-                //     }
-                // }
             }
+
         }
         stage("Verify the results") {
             steps {
