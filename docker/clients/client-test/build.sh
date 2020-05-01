@@ -7,7 +7,7 @@ mvn clean
 
 cp -r src ../../docker/clients/client-test/.
 cp pom.xml ../../docker/clients/client-test/.
-cp $MAVEN_SETTINGS ../../docker/clients/client-test/.
+cp "$MAVEN_SETTINGS" ../../docker/clients/client-test/settings.xml
 
 cd ../../docker/clients/client-test/
 

@@ -17,7 +17,8 @@ pipeline{
                             chmod +x                                                         \
                                     ./build-test.sh                                           \
                                     ../projet-isa-devops-20-team-b-20-carrier-api/compile.sh \
-                                    ../projet-isa-devops-20-team-b-20-drone-api/compile.sh
+                                    ../projet-isa-devops-20-team-b-20-drone-api/compile.sh \
+                                    ./clients/client-test/build.sh
                         '''
                         sh "./build-test.sh"
                     }
