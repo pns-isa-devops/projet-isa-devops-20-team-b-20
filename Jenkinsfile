@@ -5,17 +5,22 @@ pipeline{
         disableConcurrentBuilds()
         timeout(time: 1, unit: "HOURS")
     }
+    environment {
+        MVN_SETTING_PROVIDER = "3ec57b41-efe6-4628-a6c7-8be5f1c26d77"
+    }
     stages {
         stage("build") {
             steps {
-                dir('./docker/') {
-                    sh '''
-                        chmod +x                                                         \
-                                ./build-test.sh                                           \
-                                ../projet-isa-devops-20-team-b-20-carrier-api/compile.sh \
-                                ../projet-isa-devops-20-team-b-20-drone-api/compile.sh
-                    '''
-                    sh "./build-test.sh"
+                configFileProvider([configFile(fileId: MVN_SETTING_PROVIDER, variable: "MAVEN_SETTINGS")]) {
+                    dir('./docker/') {
+                        sh '''
+                            chmod +x                                                         \
+                                    ./build-test.sh                                           \
+                                    ../projet-isa-devops-20-team-b-20-carrier-api/compile.sh \
+                                    ../projet-isa-devops-20-team-b-20-drone-api/compile.sh
+                        '''
+                        sh "./build-test.sh"
+                    }
                 }
             }
         }
