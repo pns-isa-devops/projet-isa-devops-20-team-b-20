@@ -1,3 +1,5 @@
+#!/bin/bash
+
 cd ../../../projet-isa-devops-20-team-b-20-client/integration-tests
 echo "Compiling the DD client test"
 

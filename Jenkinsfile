@@ -39,10 +39,10 @@ pipeline{
                             steps {
                                 echo "run integration test on [${TEST_NAME}]"
                                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                                    sh """
-                                        docker wait dd-integration-tests > ${TEST_NAME}.txt
-                                        exit '$(cat ${TEST_NAME}.txt)'
-                                    """
+                                    sh '''
+                                        sg docker -c "docker wait dd-integration-tests > ${TEST_NAME}.txt"
+                                        exit "$(cat ${TEST_NAME}.txt)"
+                                    '''
                                 }
                             }
                             post {

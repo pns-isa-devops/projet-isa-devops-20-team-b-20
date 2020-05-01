@@ -39,10 +39,13 @@ services:
   # The integration tests
   client-test:
     environment:
-      # - TEST_NAME=${TEST_NAME}
-      - TEST_NAME="schedule_and_make_a_delivery"
+      - TEST_NAME=${TEST_NAME}
+      - HOST=dd_system
+      - PORT=8080
     image: isa-devops/integration-tests
     container_name: dd-integration-tests
+    volumes:
+      - .:/host
     depends_on:
       dd_system:
         condition: service_healthy
