@@ -191,7 +191,7 @@ function run() {
             mvn clean install
         fi
         cd projet-isa-devops-20-team-b-20-web-service
-        mvn tomee:run
+        mvn clean package tomee:run
     elif [[ $PROJECT == "drone-api" ]]; then
             cd projet-isa-devops-20-team-b-20-drone-api
         if [[ $CARG == 1 ]]; then
