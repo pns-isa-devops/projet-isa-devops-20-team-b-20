@@ -1,4 +1,6 @@
 #!/bin/bash
+parent_path=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
+cd "$parent_path"
 
 cd ../../../projet-isa-devops-20-team-b-20-client/integration-tests
 echo "Compiling the DD client test"
@@ -7,7 +9,7 @@ mvn clean
 
 cp -r src ../../docker/clients/client-test/.
 cp pom.xml ../../docker/clients/client-test/.
-cp "$MAVEN_SETTINGS" ../../docker/clients/client-test/settings.xml
+cp "$parent_path"/../../resources/settings.xml ../../docker/clients/client-test/settings.xml
 
 cd ../../docker/clients/client-test/
 
