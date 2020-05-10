@@ -43,10 +43,12 @@
 `getnextdelivery 8:05`
 
 `startdelivery 123456789B`
+>Use `setavailable 001` if the drone is not available yet
 
 `getnextdelivery 8:25`
 
 `startdelivery 123456789C`
+>Use `setavailable 001` if the drone is not available yet
 
 ### Put the drone in charge
 
