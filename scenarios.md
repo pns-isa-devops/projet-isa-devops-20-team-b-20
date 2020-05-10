@@ -54,8 +54,6 @@
 
 `setincharge 001`
 
-`setavailable 001`
-
 `setincharge 001` (should display an error)
 
 `setinreview 001` (should display an error)
@@ -80,7 +78,7 @@
 `getinvoices`
 
 ### Confirm invoice payment
-`confirminvoicepayment` (add the id displayed by the above command )
+`confirminvoicepayment` (add the id displayed by the above command in parameter)
 
 ### Check payment
 `getinvoices`
