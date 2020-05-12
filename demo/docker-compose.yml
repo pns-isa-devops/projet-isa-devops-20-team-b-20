@@ -1,0 +1,77 @@
+version: "2.1"
+
+services:
+  # The Drone Delivery service, a J2E system
+  dd_system:
+    image: isa-devops/drone-delivery
+    container_name: dd_system
+    environment:
+      - dronepark_host=dd-api-drone
+      - dronepark_port=9090
+      - carrier_host=dd-api-carrier
+      - carrier_port=9191
+    expose:
+      - "8080"
+    ports:
+      - "8080:8080"
+    depends_on:
+      - external_partners_api_carrier
+      - external_partners_api_drone
+
+  # The external partners (drone api), implemented as .Net services
+  external_partners_api_carrier:
+    image: isa-devops/dd-api-carrier
+    container_name: dd-api-carrier
+    expose:
+      - "9191"
+    ports:
+      - "9191:9191"
+
+  # The external partners (drone api), implemented as .Net services
+  external_partners_api_drone:
+    image: isa-devops/dd-api-drone
+    container_name: dd-api-drone
+    expose:
+      - "9090"
+    ports:
+      - "9090:9090"
+
+  # The warehouse CLI
+  client-warehouse:
+    image: isa-devops/dd-client-warehouse
+    container_name: dd-client-warehouse
+    command: "dd_system 8080"
+    volumes:
+      - .:/host
+    depends_on:
+      dd_system:
+        condition: service_healthy
+    stdin_open: true
+    tty: true
+
+  # The office CLI
+  client-office:
+    image: isa-devops/dd-client-office
+    container_name: dd-client-office
+    command: "dd_system 8080"
+    volumes:
+      - .:/host
+    depends_on:
+      dd_system:
+        condition: service_healthy
+    stdin_open: true
+    tty: true
+
+  # The integration tests
+  client-test:
+    environment:
+      - TEST_NAME=drone_delivery
+      - HOST=dd_system
+      - PORT=8080
+    image: isa-devops/integration-tests
+    container_name: dd-integration-tests
+    volumes:
+      - .:/host
+    depends_on:
+      dd_system:
+        condition: service_healthy
