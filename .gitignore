@@ -21,3 +21,4 @@ local-utils
 
 # Avoid ignoring Maven wrapper jar file (.jar files are usually ignored)
 !/.mvn/wrapper/maven-wrapper.jar
+architecture-models/FINAL_DIAGRAM.jpg
